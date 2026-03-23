@@ -9,7 +9,8 @@ const app = express();
 const PORT = process.env.PORT;
 
 app.use(cors({
-  origin: "*"
+ origin: "https://gptzen-frontend.onrender.com",
+  credentials: true
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
