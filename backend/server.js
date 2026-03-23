@@ -18,19 +18,35 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", authRoutes);
 app.use("/api", chatRoutes);
 
-const connectDB = async () => {
+
+const startServer = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
     console.log("DB is connected");
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+
   } catch (err) {
     console.log("failed to connect", err);
   }
 };
 
-app.listen(PORT, () => {
-  console.log("server is runig on port");
-  connectDB();
-});
+startServer();
+// const connectDB = async () => {
+//   try {
+//     await mongoose.connect(process.env.MONGODB_URI);
+//     console.log("DB is connected");
+//   } catch (err) {
+//     console.log("failed to connect", err);
+//   }
+// };
+
+// app.listen(PORT, () => {
+//   console.log("server is runig on port");
+//   connectDB();
+// });
 
 // app.post("/test", async (req, res) => {
 //   try {
